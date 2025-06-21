@@ -1,4 +1,4 @@
-# Thunder-Linux-Power-Edition (Un Realese) 
+# Thunder-Linux-Power-Edition (Realese 3.6) 
 # Testing Phase Not Yet Public
 
 🔥 **Thunder Linux Power Edition** 
