@@ -53,4 +53,28 @@ KERNEL_VERSION="4.9.82-perf+ / Local Base System"
 ┌─[root@localhost]─[~]
 └──╼ #
 ````
+# VIA GIT SERVER
+````
+git clone https://github.com/SahrulGunawan-ID/Thunder-Linux-Power-Edition
+````
+````
+cd Thunder-Linux-Power-Edition
+````
+
+# Run Script
+````
+./get_all_repo.rc
+````
+# Extract Rootfs
+````
+tar xvf thunder.tar.xz
+````
+
+# Run Script Module
+````
+./thunder
+````
+
+# All Done
+
 # Thank You For Supporting Us
