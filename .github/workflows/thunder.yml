@@ -1,0 +1,21 @@
+version: "3.6"
+architecture: aarch64
+description: |
+  Thunder Linux Power Edition
+  Lightweight, modular, and self-contained Linux for ARM-based systems.
+
+source:
+  url: https://github.com/SahrulGunawan-ID/Thunder-Linux-Power-Edition/releases/download/Thunder-Linux/thunder.tar.xz
+  compressed: tar.xz
+
+entrypoint:
+  file: ./thunder
+  permissions: executable
+
+filesystem:
+  unpack_dir: ./rootfs
+  use_proot: true
+
+metadata:
+  maintainer: Sahrul Gunawan
+  project: Thunder Linux Power Edition
