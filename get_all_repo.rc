@@ -1,0 +1,7 @@
+#!sh
+# REPO HOST REALESE 
+#https://github.com/SahrulGunawan-ID/Thunder-Linux-Power-Edition/releases/tag/Thunder-Linux
+
+
+wget https://github.com/SahrulGunawan-ID/Thunder-Linux-Power-Edition/releases/download/Thunder-Linux/thunder.tar.xz
+wget https://github.com/SahrulGunawan-ID/Thunder-Linux-Power-Edition/releases/download/Thunder-Linux/ThunderLinux.7z
