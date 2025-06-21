@@ -1,21 +1,35 @@
-version: "3.6"
-architecture: aarch64
-description: |
-  Thunder Linux Power Edition
-  Lightweight, modular, and self-contained Linux for ARM-based systems.
+name: Thunder Linux Runtime 🧩
 
-source:
-  url: https://github.com/SahrulGunawan-ID/Thunder-Linux-Power-Edition/releases/download/Thunder-Linux/thunder.tar.xz
-  compressed: tar.xz
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main ]
 
-entrypoint:
-  file: ./thunder
-  permissions: executable
+jobs:
+  thunder-run:
+    runs-on: ubuntu-latest
+    name: Run Thunder Linux v3.6 (aarch64)
+    steps:
 
-filesystem:
-  unpack_dir: ./rootfs
-  use_proot: true
+    - name: Checkout repository
+      uses: actions/checkout@v4
 
-metadata:
-  maintainer: Sahrul Gunawan
-  project: Thunder Linux Power Edition
+    - name: Install QEMU + Docker multiarch
+      uses: docker/setup-qemu-action@v3
+      with:
+        platforms: all
+
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v3
+
+    - name: Pull & extract Thunder Linux tarball
+      run: |
+        mkdir thunder && cd thunder
+        curl -L "https://github.com/SahrulGunawan-ID/Thunder-Linux-Power-Edition/releases/download/Thunder-Linux/thunder.tar.xz" -o thunder.tar.xz
+        tar -xf thunder.tar.xz
+        chmod +x ./thunder
+
+    - name: Emulate Thunder execution (placeholder)
+      run: |
+        echo "🔧 Simulasi Thunder Linux v3.6..."
+        ./thunder || echo "⚠️ Gagal dijalankan di host GitHub (karena keterbatasan emulasi direct shell aarch64)"
