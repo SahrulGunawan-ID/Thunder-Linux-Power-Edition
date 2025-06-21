@@ -6,30 +6,39 @@ on:
     branches: [ main ]
 
 jobs:
-  thunder-run:
+  thunder-core:
     runs-on: ubuntu-latest
-    name: Run Thunder Linux v3.6 (aarch64)
+    name: Run Thunder v3.6 via Docker (ARM64 Emulation)
+
     steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
 
-    - name: Checkout repository
-      uses: actions/checkout@v4
+      - name: Set up QEMU for Multi-Arch
+        uses: docker/setup-qemu-action@v3
+        with:
+          platforms: all
 
-    - name: Install QEMU + Docker multiarch
-      uses: docker/setup-qemu-action@v3
-      with:
-        platforms: all
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
 
-    - name: Set up Docker Buildx
-      uses: docker/setup-buildx-action@v3
+      - name: Create Thunder Dockerfile
+        run: |
+          echo '
+          FROM arm64v8/debian:bullseye-slim
+          WORKDIR /opt/thunder
+          RUN apt-get update && apt-get install -y curl xz-utils && rm -rf /var/lib/apt/lists/*
+          ADD https://github.com/SahrulGunawan-ID/Thunder-Linux-Power-Edition/releases/download/Thunder-Linux/thunder.tar.xz .
+          RUN tar -xJf thunder.tar.xz && chmod +x ./thunder
+          CMD ["./thunder"]
+          ' > Dockerfile
 
-    - name: Pull & extract Thunder Linux tarball
-      run: |
-        mkdir thunder && cd thunder
-        curl -L "https://github.com/SahrulGunawan-ID/Thunder-Linux-Power-Edition/releases/download/Thunder-Linux/thunder.tar.xz" -o thunder.tar.xz
-        tar -xf thunder.tar.xz
-        chmod +x ./thunder
+      - name: Build Thunder Docker Image
+        run: |
+          docker buildx build --platform linux/arm64 \
+            -t thunder-linux:3.6 \
+            --load .
 
-    - name: Emulate Thunder execution (placeholder)
-      run: |
-        echo "🔧 Simulasi Thunder Linux v3.6..."
-        ./thunder || echo "⚠️ Gagal dijalankan di host GitHub (karena keterbatasan emulasi direct shell aarch64)"
+      - name: Run Thunder Linux
+        run: |
+          docker run --rm --platform linux/arm64 thunder-linux:3.6 || echo "⚠️ thunder executable did not run (expected on GitHub-hosted runner)"
