@@ -1,5 +1,22 @@
 # Thunder-Linux-Power-Edition (Realese 3.6) 
-# Testing Phase Not Yet Public
+
+# 🔧 Thunder Linux Add-On Toolkit
+
+Add-On Toolkit ini adalah pelengkap modular untuk ekosistem Thunder Linux Power Edition. Dibangun sepenuhnya dalam lingkungan self-contained, semua binary berada dalam ruang sandbox tanpa ketergantungan pada host Android.
+
+## 📦 Daftar Add-On Termasuk:
+
+| Tools            | Deskripsi                                |
+|------------------|-------------------------------------------|
+| **Busybox SELinux** | Core utilitas dengan dukungan konteks SELinux |
+| **Proot**        | Emulasi root dan chroot tanpa akses root  |
+| **Make**         | Utilitas kompilasi Makefile standar       |
+| **ADB**          | Android Debug Bridge CLI client           |
+| **JQ**           | Parser JSON ringan untuk shell scripting  |
+| **AAPT**         | Android Asset Packaging Tool              |
+| **7z**           | Kompresor & dekompresor .7z format        |
+
+# Testing Public
 
 🔥 **Thunder Linux Power Edition** 
 
@@ -62,6 +79,9 @@ cd Thunder-Linux-Power-Edition
 ````
 
 # Run Script
+````
+chmod 777 get_all_repo.rc
+````
 ````
 ./get_all_repo.rc
 ````
